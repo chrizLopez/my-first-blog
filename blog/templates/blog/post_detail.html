@@ -4,7 +4,13 @@
     <main role="main" class="container">
         <div class="jumbotron">
             <h1>{{ post.title }}</h1>
-            <small class="text-right">published: {{ post.published_date }}</small>
+
+            {% if post.published_date %}
+                <small class="text-right">published: {{ post.published_date }}</small>
+            {% else %}
+                <a class="btn btn-primary" href="{% url 'post_publish' pk=post.pk %}">Publish</a>
+            {% endif %}
+
             {% if user.is_authenticated %}
             <div class="text-right">
                 <a class="btn btn-warning text-right" href="{% url 'post_edit' pk=post.pk %}"><i class='fas fa-pen'></i></a>
